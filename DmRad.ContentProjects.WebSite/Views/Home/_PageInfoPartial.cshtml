@@ -1,0 +1,49 @@
+﻿@using DmRad.ContentProjects.Common.Models
+@{
+    Layout = null;
+}
+@model PageModel
+
+<nav style="text-align: center;">
+    <ul class="pagination">
+        @if (Model.CurrentPage > 1)
+        {
+            <li>
+                <a href="#" onclick="getRecordByPage(1)">На первую</a>
+            </li>
+        }
+        <li class="@if(Model.CurrentPage == 1) { <text>disabled</text> }">
+            @if (Model.CurrentPage > 1)
+            {
+                <a href="#" onclick="getRecordByPage(@(Model.CurrentPage-1));">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            }
+            else
+            {
+                <span aria-hidden="true">&laquo;</span>
+            }
+        </li>
+        <li class="active">
+            <a href="#" id="currentPage">@Model.CurrentPage</a>
+        </li>
+        <li class="@if(Model.CurrentPage == Model.MaxPage) { <text>disabled</text> }">
+            @if (Model.CurrentPage < Model.MaxPage)
+            {
+                <a href="#" onclick="getRecordByPage(@(Model.CurrentPage+1));">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            }
+            else
+            {
+                <span aria-hidden="true">&raquo;</span>
+            }
+        </li>
+        @if (Model.CurrentPage < Model.MaxPage)
+        {
+            <li>
+                <a href="#" onclick="getRecordByPage(@(Model.MaxPage));">На последнюю</a>
+            </li>
+        }
+    </ul>
+</nav>

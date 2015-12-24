@@ -1,0 +1,29 @@
+﻿@using DmRad.ContentProjects.Common.Models;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model RecordInfoModel
+
+<button type="submit" class="btn btn-primary" onclick="window.location = '@Url.Action("Index", "Home")';">
+    <span class="glyphicon glyphicon-chevron-left"></span> На главную
+</button>
+
+@Html.ValidationSummary(true)
+
+@if (Model.Record != null)
+{
+    <h4>Запись c номером @Model.Record.Id</h4>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">@Model.Record.Header</div>
+        <div class="panel-body">
+            @Model.Record.Text
+        </div>
+    </div>
+}
+
+<h4>Следующие записи:</h4>
+@Html.Partial("_RecordsLinksPartial", Model.NextRecordsIds)
+
+<h4>Случайные записи:</h4>
+@Html.Partial("_RecordsLinksPartial", Model.RandomRecordsIds)

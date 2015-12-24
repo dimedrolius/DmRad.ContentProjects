@@ -1,0 +1,61 @@
+﻿@using DmRad.ContentProjects.Common.Models;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model HeadersModel
+
+@Html.ValidationSummary(true)
+
+<button type="button" class="btn btn-success" onclick="window.location = '@Url.Action("NewRecord", "Home")';">
+    <span class="glyphicon glyphicon-plus"></span> Добавить запись
+</button>
+
+<div class="panel panel-default" style="margin-top: 20px;" id="recordsList">
+        @Html.Partial("_RecordsListPartial", Model)
+</div>
+
+<script>
+    function getRecordByPage(page) {
+        $('#loading').show();
+
+        $.ajax({
+            url: "@Url.Action("GetRecords", "Home")",
+            type: "POST",
+            cache: false,
+            data: { page: page },
+            success: function (res) {
+                $('#loading').hide();
+
+                $('#recordsList').html(res);
+            },
+            error: function (request, status, error) {
+                $('#loading').hide();
+                showErrorAlert("Ошибка во время выполнения запроса к серверу: " + error);
+            }
+        });
+    }
+
+    function deleteRecord(id) {
+        showConfirmDialog('Вы действительно хотите удалить запись?', function () {
+            $('#loading').show();
+
+            $.ajax({
+                url: "@Url.Action("DeleteRecord", "Home")",
+                type: "POST",
+                data: { recordId: id },
+                success: function (res) {
+                    $('#loading').hide();
+
+                    if (res.result)
+                        getRecordByPage($('#currentPage').text());
+                    else
+                        showErrorAlert("Возникли ошибки во время попытки удалить запись: " + res.errors);
+                },
+                error: function (request, status, error) {
+                    $('#loading').hide();
+                    showErrorAlert("Ошибка во время выполнения запроса к серверу: " + error);
+                }
+            });
+        });
+    }
+</script>

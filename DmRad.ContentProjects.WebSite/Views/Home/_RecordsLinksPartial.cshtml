@@ -1,0 +1,22 @@
+﻿@{
+    Layout = null;
+}
+@model List<int>
+
+@if (Model != null && Model.Any())
+{
+    <ul class="list-group">
+        @foreach (var recordId in Model)
+        {
+            <li class="list-group-item">
+                <a href="@Url.Action("Record", "Home", new {id = recordId})">
+                    @recordId
+                </a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <text>Записи отсутствуют</text>
+}

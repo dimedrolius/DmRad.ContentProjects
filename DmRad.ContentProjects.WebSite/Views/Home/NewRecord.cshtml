@@ -1,0 +1,56 @@
+﻿@using DmRad.ContentProjects.Common.Models;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model RecordModel
+
+<button type="submit" class="btn btn-primary" onclick="window.location = '@Url.Action("Index", "Home")';">
+    <span class="glyphicon glyphicon-chevron-left"></span> На главную
+</button>
+
+@Html.ValidationSummary(true)
+
+<h2>Новая запись</h2>
+@using (Html.BeginForm("NewRecord", "Home", FormMethod.Post, new { id="newRecordAddingForm" }))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Id, new { @class = "col-sm-8 control-label" })
+        <div class="col-sm-4">
+            @Html.TextBoxFor(m => m.Id, new { @class = "form-control" })
+        </div>
+        @Html.ValidationMessageFor(m => m.Id)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Header, new {@class = "col-sm-8 control-label"})
+        <div class="col-sm-4">
+            @Html.TextBoxFor(m => m.Header, new {@class = "form-control"})
+        </div>
+        @Html.ValidationMessageFor(m => m.Header)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Text, new {@class = "col-sm-8 control-label"})
+        <div class="col-sm-4">
+            @Html.TextAreaFor(m => m.Text, new {@class = "form-control"})
+        </div>
+        @Html.ValidationMessageFor(m => m.Text)
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        <span class="glyphicon glyphicon-floppy-disk"></span> Сохранить
+    </button>
+}
+
+@if (Model.AddedSuccess)
+{
+    <text>
+        <script>
+            $('document').ready(function() {
+                $('#newRecordAddingForm input, #newRecordAddingForm textarea').val('');
+                showInfoAlert('Запись успешно добавлена');
+            });
+        </script>
+    </text>
+}
+
+<script>
+</script>

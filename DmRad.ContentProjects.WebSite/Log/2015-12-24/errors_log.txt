@@ -1,0 +1,23 @@
+2015-12-24 15:40:32.2307|Error|System.Data.Entity.Core.MetadataException: Unable to load the specified metadata resource.
+   в System.Data.Entity.Core.Metadata.Edm.MetadataArtifactLoaderCompositeResource.LoadResources(String assemblyName, String resourceName, ICollection`1 uriRegistry, MetadataArtifactAssemblyResolver resolver)
+   в System.Data.Entity.Core.Metadata.Edm.MetadataArtifactLoaderCompositeResource.CreateResourceLoader(String path, ExtensionCheck extensionCheck, String validExtension, ICollection`1 uriRegistry, MetadataArtifactAssemblyResolver resolver)
+   в System.Data.Entity.Core.Metadata.Edm.MetadataArtifactLoader.Create(String path, ExtensionCheck extensionCheck, String validExtension, ICollection`1 uriRegistry, MetadataArtifactAssemblyResolver resolver)
+   в System.Data.Entity.Core.Metadata.Edm.MetadataCache.SplitPaths(String paths)
+   в System.Data.Entity.Core.Common.Utils.Memoizer`2.<>c__DisplayClass2.<Evaluate>b__0()
+   в System.Data.Entity.Core.Common.Utils.Memoizer`2.Result.GetValue()
+   в System.Data.Entity.Core.Common.Utils.Memoizer`2.Evaluate(TArg arg)
+   в System.Data.Entity.Core.Metadata.Edm.MetadataCache.GetArtifactLoader(DbConnectionOptions effectiveConnectionOptions)
+   в System.Data.Entity.Core.Metadata.Edm.MetadataCache.GetMetadataWorkspace(DbConnectionOptions effectiveConnectionOptions)
+   в System.Data.Entity.Core.EntityClient.EntityConnection.GetMetadataWorkspace()
+   в System.Data.Entity.Core.Objects.ObjectContext.RetrieveMetadataWorkspaceFromConnection()
+   в System.Data.Entity.Core.Objects.ObjectContext..ctor(EntityConnection connection, Boolean isConnectionConstructor, ObjectQueryExecutionPlanFactory objectQueryExecutionPlanFactory, Translator translator, ColumnMapFactory columnMapFactory)
+   в System.Data.Entity.Internal.InternalConnection.CreateObjectContextFromConnectionModel()
+   в System.Data.Entity.Internal.LazyInternalConnection.CreateObjectContextFromConnectionModel()
+   в System.Data.Entity.Internal.LazyInternalContext.InitializeContext()
+   в System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   в System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   в System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   в System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   в System.Linq.Queryable.FirstOrDefault[TSource](IQueryable`1 source)
+   в DmRad.ContentProjects.Common.Services.Implementation.TestDataService.<>c__DisplayClass0_0.<GetHeadersByPage>b__0(ContentProjectsDb db) в C:\Users\Dima\Desktop\DmRad.ContentProjects\DmRad.ContentProjects.Common\Services\Implementation\TestDataService.cs:строка 29
+   в DmRad.ContentProjects.Common.Services.BaseService.WithDb(Action`1 workingWithDb) в C:\Users\Dima\Desktop\DmRad.ContentProjects\DmRad.ContentProjects.Common\Services\BaseService.cs:строка 32

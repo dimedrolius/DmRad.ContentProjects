@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DmRad.ContentProjects.Database.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TEST_DATA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="HEADER" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="TEXT" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TEST_DATA_META">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="COUNT_RECORDS" Type="int" />
+        </EntityType>
+        <EntityContainer Name="DmRadContentProjectsDatabaseStoreContainer">
+          <EntitySet Name="TEST_DATA" EntityType="Self.TEST_DATA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEST_DATA_META" EntityType="Self.TEST_DATA_META" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DmRad.ContentProjects.Database" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TEST_DATA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="HEADER" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEXT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="ContentProjectsDb" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TEST_DATA" EntityType="Self.TEST_DATA" />
+          <FunctionImport Name="GetRecordsByPage" ReturnType="Collection(DmRad.ContentProjects.Database.GetRecordsByPage_Result)">
+            <Parameter Name="offset" Mode="In" Type="Int32" />
+            <Parameter Name="recordsOnPage" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRecordsByPage1" ReturnType="Collection(DmRad.ContentProjects.Database.GetRecordsByPage1_Result)">
+            <Parameter Name="offset" Mode="In" Type="Int32" />
+            <Parameter Name="recordsOnPage" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRecordsByPage2" ReturnType="Collection(DmRad.ContentProjects.Database.GetRecordsByPage2_Result)">
+            <Parameter Name="offset" Mode="In" Type="Int32" />
+            <Parameter Name="recordsOnPage" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="TEST_DATA_META" EntityType="DmRad.ContentProjects.Database.TEST_DATA_META" />
+        </EntityContainer>
+        <ComplexType Name="GetRecordsByPage_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="HEADER" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="TEXT" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetRecordsByPage1_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Header" Nullable="false" MaxLength="256" />
+        </ComplexType>
+        <ComplexType Name="GetRecordsByPage2_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Header" Nullable="false" MaxLength="256" />
+        </ComplexType>
+        <EntityType Name="TEST_DATA_META">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="COUNT_RECORDS" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DmRadContentProjectsDatabaseStoreContainer" CdmEntityContainer="ContentProjectsDb">
+          <EntitySetMapping Name="TEST_DATA">
+            <EntityTypeMapping TypeName="DmRad.ContentProjects.Database.TEST_DATA">
+              <MappingFragment StoreEntitySet="TEST_DATA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="HEADER" ColumnName="HEADER" />
+                <ScalarProperty Name="TEXT" ColumnName="TEXT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEST_DATA_META">
+            <EntityTypeMapping TypeName="DmRad.ContentProjects.Database.TEST_DATA_META">
+              <MappingFragment StoreEntitySet="TEST_DATA_META">
+                <ScalarProperty Name="COUNT_RECORDS" ColumnName="COUNT_RECORDS" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
